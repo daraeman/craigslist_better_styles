@@ -4,9 +4,9 @@
 // @description  Moves the 'hide' button to standard location for faster hiding of items
 // @homepageURL  https://github.com/daraeman/craigslist_better_styles
 // @author       daraeman
-// @version      1.0
-// @date         2017-12-05
-// @include      https://*.craigslist.org/search/*
+// @version      1.1
+// @date         2017-01-08
+// @include      https://*.craigslist.org/*
 // @downloadURL  https://github.com/daraeman/craigslist_better_styles/raw/master/craigslist_better_styles.user.js
 // @updateURL    https://github.com/daraeman/craigslist_better_styles/raw/master/craigslist_better_styles.meta.js
 // ==/UserScript==
@@ -21,9 +21,16 @@ function createStyles() {
 	document.head.appendChild( style_el );
 }
 
+function getPage() {
+	return ( /search/.test( document.body.className ) ) ? "search" : false;
+}
+
 function init() {
-	document.body.className = document.body.className + " " + script_id;
-	createStyles();
+	let page = getPage();
+	if ( page === "search" ) {
+		document.body.className = document.body.className + " " + script_id;
+		createStyles();
+	}
 }
 
 init();
